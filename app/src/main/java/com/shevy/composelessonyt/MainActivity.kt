@@ -28,20 +28,28 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LazyRow(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.Green)
             ) {
                 itemsIndexed(
                     listOf(
-                        ItemRowModel(R.drawable.image_1, "Миша"),
-                        ItemRowModel(R.drawable.image_2, "Егор"),
-                        ItemRowModel(R.drawable.image_3, "Максим"),
-                        ItemRowModel(R.drawable.image_4, "Лена"),
-                        ItemRowModel(R.drawable.image_5, "Лена"),
-                        ItemRowModel(R.drawable.image_1, "Игорь"),
-                        ItemRowModel(R.drawable.image_2, "Сергей")
+                        ItemRowModel(
+                            R.drawable.image_1,
+                            "Миша",
+                            "test dssdajk dsdadsv df" +
+                                    " sFDSf dF DSfF  f dfsffd" +
+                                    " sfg safkdjsbk dsabks bkdjbjsacbads" +
+                                    "bkdsc bdsbk bjdsbd sbjb jdbjkd kbskbjd sbd" +
+                                    "scb jsdba bbjsabjk dakbkdj"
+                        ),
+                        ItemRowModel(R.drawable.image_2, "Егор", "test"),
+                        ItemRowModel(R.drawable.image_3, "Максим", "test"),
+                        ItemRowModel(R.drawable.image_4, "Лена", "test"),
+                        ItemRowModel(R.drawable.image_5, "Лена", "test"),
+                        ItemRowModel(R.drawable.image_1, "Игорь", "test"),
+                        ItemRowModel(R.drawable.image_2, "Сергей", "test")
                     )
                 ) { index, item ->
                     ItemRow(item = item)
