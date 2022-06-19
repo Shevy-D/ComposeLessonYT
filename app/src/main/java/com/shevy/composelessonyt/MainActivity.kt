@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,19 +28,23 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LazyColumn(
-                horizontalAlignment = Alignment.CenterHorizontally,
+            LazyRow(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .background(Color.Green)
             ) {
                 itemsIndexed(
-                    listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5")
-                ) { index, item ->
-                    Text(
-                        text = item,
-                        fontSize = 30.sp,
-                        modifier = Modifier.padding(vertical = 10.dp)
+                    listOf(
+                        ItemRowModel(R.drawable.image_1, "Миша"),
+                        ItemRowModel(R.drawable.image_2, "Егор"),
+                        ItemRowModel(R.drawable.image_3, "Максим"),
+                        ItemRowModel(R.drawable.image_4, "Лена"),
+                        ItemRowModel(R.drawable.image_5, "Лена"),
+                        ItemRowModel(R.drawable.image_1, "Игорь"),
+                        ItemRowModel(R.drawable.image_2, "Сергей")
                     )
+                ) { index, item ->
+                    ItemRow(item = item)
                 }
             }
         }
