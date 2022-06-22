@@ -23,10 +23,6 @@ import com.shevy.composelessonyt.MainActivity as MainActivity1
 @Composable
 fun GeoQueez(context: Context) {
 
-/*    var isExpanded by remember {
-        mutableStateOf(false)
-    }*/
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -45,10 +41,10 @@ fun GeoQueez(context: Context) {
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(16.dp)
+                    .height(5.dp)
             )
             Row() {
-                Button(onClick = {
+                Button(modifier = Modifier.padding(10.dp), onClick = {
                     Toast.makeText(
                         context,
                         "Correct!",
@@ -57,12 +53,12 @@ fun GeoQueez(context: Context) {
                 }) {
                     Text(text = "True")
                 }
-                Spacer(
+/*                Spacer(
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(16.dp)
-                )
-                Button(onClick = {
+                )*/
+                Button(modifier = Modifier.padding(10.dp), onClick = {
                     Toast.makeText(
                         context,
                         "Incorrect!",
@@ -74,38 +70,4 @@ fun GeoQueez(context: Context) {
             }
         }
     }
-}
-
-/*Row(
-    modifier = Modifier
-        .padding(3.dp)
-        .fillMaxWidth()
-        .background(Color.White)
-) {
-    Image(
-        painter = painterResource(id = item.imageId),
-        contentDescription = "image",
-        contentScale = ContentScale.Crop,
-        modifier = Modifier
-            .padding(3.dp)
-            .size(64.dp)
-            .clip(CircleShape)
-    )
-    Column(
-        modifier = Modifier
-            .padding(start = 10.dp, top = 10.dp)
-    ) {
-        Text(text = item.title)
-        Text(modifier = Modifier.clickable {
-            isExpanded = !isExpanded
-        }, maxLines = if (isExpanded) 10 else 1, text = item.content)
-    }
-}*/
-
-fun trueAnswer(context: Context) {
-    Toast.makeText(
-        context,
-        "R.string.correct_toast.toString()",
-        Toast.LENGTH_SHORT
-    ).show()
 }
