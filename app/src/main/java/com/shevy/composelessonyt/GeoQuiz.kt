@@ -1,26 +1,19 @@
 package com.shevy.composelessonyt
 
 import android.content.Context
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.shevy.composelessonyt.model.Question
-import com.shevy.composelessonyt.MainActivity as MainActivity1
 
 private val questionBank = listOf(
     Question(R.string.question_australia, true),
@@ -53,7 +46,7 @@ fun GeoQueez(context: Context) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = questionTextView,
+                text = questionTextView.value,
                 color = Color.White
             )
             Spacer(
@@ -63,9 +56,9 @@ fun GeoQueez(context: Context) {
             )
             Row() {
                 Button(modifier = Modifier.padding(10.dp), onClick = {
-                    checkAnswer(true, context)
+                    checkAnswer(true, context, currentIndex.value)
                 }) {
-                    Text(text = "True")
+                    Text("True")
                 }
 /*                Spacer(
                     modifier = Modifier
@@ -73,25 +66,25 @@ fun GeoQueez(context: Context) {
                         .width(16.dp)
                 )*/
                 Button(modifier = Modifier.padding(10.dp), onClick = {
-                    checkAnswer(false, context)
+                    checkAnswer(false, context, currentIndex.value)
                 }) {
-                    Text(text = "False")
+                    Text("False")
                 }
             }
 
             Row() {
                 Button(modifier = Modifier.padding(10.dp), onClick = {
-                    if (currentIndex != 0) {
-                        currentIndex = (currentIndex - 1) % questionBank.size
-                        updateQuestion()
+                    if (currentIndex.value != 0) {
+                        currentIndex.value = (currentIndex.value - 1) % questionBank.size
+                        //updateQuestion(currentIndex.value, questionTextView.value)
                     }
                 }) {
                     Image(painter = painterResource(id = R.drawable.arrow_left), contentDescription = "Button last")
                 }
 
                 Button(modifier = Modifier.padding(10.dp), onClick = {
-                    currentIndex = (currentIndex + 1) % questionBank.size
-                    updateQuestion()
+                    currentIndex.value = (currentIndex.value + 1) % questionBank.size
+                    //updateQuestion(currentIndex.value, questionTextView.value)
                 }) {
                     Image(painter = painterResource(id = R.drawable.arrow_right), contentDescription = "Button next")
                 }
@@ -99,16 +92,11 @@ fun GeoQueez(context: Context) {
         }
     }
 
-    val questionTextResId = questionBank[currentIndex].textResId.toString()
-    questionTextView = questionTextResId
+    val questionTextResId = questionBank[currentIndex.value].textResId
+    questionTextView.value = stringResource(id = questionTextResId)
 }
 
-private fun updateQuestion() {
-    val questionTextResId = questionBank[currentIndex].textResId
-    questionTextView = questionTextResId.toString()
-}
-
-private fun checkAnswer(userAnswer: Boolean, context: Context) {
+private fun checkAnswer(userAnswer: Boolean, context: Context, currentIndex: Int) {
     val correctAnswer = questionBank[currentIndex].answer
     val messageResId = if (userAnswer == correctAnswer) {
         R.string.correct_toast
