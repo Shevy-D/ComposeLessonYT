@@ -30,12 +30,16 @@ private val questionBank = listOf(
     Question(R.string.question_america, true),
     Question(R.string.question_asia, true)
 )
-private var currentIndex = 0
-
-private var questionTextView = R.string.question_australia.toString()
 
 @Composable
 fun GeoQueez(context: Context) {
+
+    val currentIndex = remember {
+        mutableStateOf(0)
+    }
+    val questionTextView = remember {
+        mutableStateOf("Canberra is the capital of Australia.")
+    }
 
     Box(
         modifier = Modifier
