@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,7 +28,7 @@ private val questionBank = listOf(
 @Composable
 fun GeoQueez(context: Context) {
 
-    val currentIndex = remember {
+    val currentIndex = rememberSaveable {
         mutableStateOf(0)
     }
     val questionTextView = remember {
